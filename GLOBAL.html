@@ -23,14 +23,14 @@ body.theme-yellow{--cyan:#ffe600;--border:rgba(255,230,0,0.15);--card:rgba(255,2
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html,body{width:100%;max-width:100%;overflow-x:hidden;}
 body{background:var(--bg);color:#c8e8ff;min-height:100vh;font-family:'Rajdhani',sans-serif;font-size:15px;}
-body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,245,255,0.015) 2px,rgba(0,245,255,0.015) 4px);pointer-events:none;z-index:400;}
-body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.08) 2px,rgba(0,0,0,0.08) 4px);pointer-events:none;z-index:400;}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,0,0,0.15) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,0.15) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
 
 /* TOPBAR */
 .topbar{position:fixed;top:0;left:0;right:0;height:50px;background:rgba(2,4,8,0.97);border-bottom:1px solid rgba(0,140,255,0.35);display:flex;align-items:center;padding:0 14px;z-index:700;backdrop-filter:blur(12px);}
 .topbar-btn{width:40px;height:40px;border:1px solid rgba(0,140,255,0.5);border-radius:8px;background:rgba(0,140,255,0.1);color:#4db8ff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem;transition:all 0.2s;flex-shrink:0;}
 .topbar-btn:hover{background:rgba(0,140,255,0.2);}
-.topbar-title{flex:1;text-align:center;font-family:'Orbitron',monospace;font-size:0.7rem;letter-spacing:4px;color:#4db8ff;}
+.topbar-title{flex:1;text-align:center;font-family:'Orbitron',monospace;font-size:0.58rem;letter-spacing:2px;color:#4db8ff;white-space:nowrap;overflow:hidden;}
 
 /* SIDEBAR */
 .sb-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:900;backdrop-filter:blur(3px);}
@@ -292,7 +292,6 @@ textarea{resize:none;height:80px;}
 .gc-nick-name{font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--cyan);flex:1;}
 .gc-online{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:blink 1.5s ease-in-out infinite;}
 
-
 /* PRODUCT CHAT OVERLAY */
 .pchat-overlay{position:fixed;inset:0;z-index:8000;display:flex;flex-direction:column;background:var(--bg);transform:translateY(100%);transition:transform 0.35s cubic-bezier(.4,0,.2,1);pointer-events:none;}
 .pchat-overlay.open{transform:translateY(0);pointer-events:all;}
@@ -341,7 +340,6 @@ textarea{resize:none;height:80px;}
 .msg-btn{width:100%;padding:9px;margin-top:10px;border:1px solid rgba(0,245,255,0.25);border-radius:6px;background:rgba(0,245,255,0.04);color:var(--cyan);font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:2px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .msg-btn:hover{background:rgba(0,245,255,0.1);border-color:var(--cyan);}
 
-
 /* REPLY */
 .reply-preview{background:rgba(0,245,255,0.06);border-left:3px solid var(--cyan);padding:6px 10px;border-radius:0 6px 6px 0;margin-bottom:6px;font-size:0.75rem;color:rgba(200,232,255,0.6);display:flex;justify-content:space-between;align-items:center;}
 .reply-preview strong{color:var(--cyan);font-family:'Orbitron',monospace;font-size:0.48rem;display:block;margin-bottom:2px;}
@@ -355,15 +353,126 @@ textarea{resize:none;height:80px;}
 .gc-bubble .cb-reply-btn{background:none;border:none;color:rgba(0,245,255,0.3);font-size:0.7rem;cursor:pointer;padding:2px 4px;float:right;margin-top:2px;}
 .gc-bubble .cb-reply-btn:hover{color:var(--cyan);}
 
+/* NOTIF */
+.notif-badge{position:absolute;top:6px;right:6px;width:8px;height:8px;border-radius:50%;background:var(--magenta);box-shadow:0 0 6px var(--magenta);display:none;}
+.notif-badge.show{display:block;}
+.topbar-btn{position:relative;}
+.tag-pill{display:inline-block;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.4);border-radius:10px;padding:1px 7px;font-family:'Orbitron',monospace;font-size:0.42rem;letter-spacing:1px;color:var(--cyan);cursor:pointer;margin-right:4px;}
+.tag-pill:hover{background:rgba(0,245,255,0.25);}
+
+/* TAG INPUT POPUP */
+.tag-popup{position:absolute;bottom:60px;left:0;right:0;background:#0a1628;border:1px solid rgba(0,245,255,0.2);border-radius:8px;padding:8px;z-index:9999;display:none;max-height:180px;overflow-y:auto;}
+.tag-popup.show{display:block;}
+.tag-option{padding:8px 12px;font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:1px;color:#c8e8ff;cursor:pointer;border-radius:4px;display:flex;align-items:center;gap:8px;}
+.tag-option:hover{background:rgba(0,245,255,0.1);color:var(--cyan);}
+.tag-option-avatar{width:24px;height:24px;border-radius:50%;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.3);display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--cyan);flex-shrink:0;}
+
+/* REPLY BAR already exists, just enhance */
+.chat-input-area{position:relative;}
+
+/* TOPBAR STATS */
+.topbar-stat{display:flex;align-items:center;gap:4px;font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:1px;color:#4db8ff;opacity:0.8;}
+.topbar-stat i{font-size:0.65rem;}
+.token-stat{color:#ffcc00;}
+.token-stat i{color:#ffcc00;}
+
+.reply-bar{background:rgba(0,245,255,0.06);border:1px solid rgba(0,245,255,0.15);border-left:3px solid var(--cyan);border-radius:4px;padding:7px 10px;margin-bottom:6px;display:none;align-items:center;gap:8px;flex-shrink:0;}
+.reply-bar.show{display:flex;}
+.reply-bar-name{font-family:'Orbitron',monospace;font-size:0.48rem;color:var(--cyan);display:block;margin-bottom:2px;}
+.reply-bar-text{font-size:0.75rem;color:rgba(200,232,255,0.5);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.reply-cancel{background:none;border:none;color:var(--magenta);cursor:pointer;font-size:0.9rem;padding:0 4px;flex-shrink:0;}
+.cb-reply-btn{background:none;border:none;color:rgba(0,245,255,0.25);font-size:0.7rem;cursor:pointer;padding:2px 5px;border-radius:3px;transition:color 0.2s;margin-left:4px;}
+.cb-reply-btn:hover{color:var(--cyan);}
+.cb-quote{background:rgba(0,245,255,0.05);border-left:2px solid var(--cyan);padding:5px 8px;border-radius:0 5px 5px 0;margin-bottom:6px;}
+.cb-quote-name{font-family:'Orbitron',monospace;font-size:0.42rem;color:var(--cyan);display:block;margin-bottom:2px;}
+.cb-quote-text{font-size:0.72rem;color:rgba(200,232,255,0.45);}
+
+.dev-dash-card{background:rgba(255,0,110,0.03);border:1px solid rgba(255,0,110,0.15);border-radius:8px;padding:16px;position:relative;margin-bottom:0;}
+.dev-dash-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--magenta),transparent);}
+.dev-dash-title{font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--magenta);margin-bottom:4px;display:flex;align-items:center;gap:8px;}
+.dev-dash-btn{width:100%;padding:11px;margin-top:8px;border:1px solid var(--magenta);border-radius:4px;background:transparent;color:var(--magenta);font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:2px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dev-dash-btn:hover{background:rgba(255,0,110,0.08);}
+.dev-dash-btn.danger{border-color:#ff4040;color:#ff4040;}
+.vip-product{border-color:#ffd700 !important;box-shadow:0 0 20px rgba(255,215,0,0.3),0 0 40px rgba(255,215,0,0.1) !important;position:relative;background:linear-gradient(135deg,rgba(255,215,0,0.04) 0%,rgba(2,4,8,0.03) 100%) !important;}
+.vip-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(90deg,#b8860b,#ffd700,#b8860b);background-size:200%;animation:vipShine 2s linear infinite;border-radius:20px;padding:4px 10px;margin-bottom:8px;box-shadow:0 0 12px rgba(255,215,0,0.4);}
+.vip-badge span{font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:2px;color:#000;font-weight:900;}
+.vip-badge i{color:#000;font-size:0.65rem;}
+.vip-exp{font-family:'Orbitron',monospace;font-size:0.45rem;letter-spacing:1px;color:rgba(255,215,0,0.6);margin-bottom:6px;}
+@keyframes vipShine{0%{background-position:0%}100%{background-position:200%}}
+
+/* DEV DASHBOARD PAGE */
+#devPage{position:fixed;inset:0;z-index:9500;background:#020408;display:none;flex-direction:column;overflow:hidden;}
+#devPage.open{display:flex;}
+#devPage::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,0,110,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,0,110,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.dev-topbar{height:50px;background:rgba(2,4,8,0.98);border-bottom:1px solid rgba(255,0,110,0.35);display:flex;align-items:center;padding:0 14px;gap:12px;flex-shrink:0;position:relative;z-index:1;}
+.dev-topbar::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--magenta),transparent);}
+.dev-back{width:38px;height:38px;border:1px solid rgba(255,0,110,0.4);border-radius:7px;background:rgba(255,0,110,0.06);color:var(--magenta);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all 0.2s;}
+.dev-back:hover{background:rgba(255,0,110,0.15);}
+.dev-topbar-title{flex:1;font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:3px;color:var(--magenta);}
+.dev-body{flex:1;overflow-y:auto;padding:16px;position:relative;z-index:1;display:flex;flex-direction:column;gap:12px;}
+.dev-body::-webkit-scrollbar{width:3px;}
+.dev-body::-webkit-scrollbar-thumb{background:rgba(255,0,110,0.3);}
+.dev-section{background:rgba(255,0,110,0.03);border:1px solid rgba(255,0,110,0.15);border-radius:8px;padding:16px;position:relative;overflow:hidden;}
+.dev-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--magenta),transparent);}
+.dev-section-title{font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:2px;color:var(--magenta);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.dev-input{width:100%;padding:11px 14px;margin-top:8px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:rgba(255,0,110,0.03);color:#c8e8ff;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none;-webkit-appearance:none;transition:border-color 0.2s;}
+.dev-input:focus{border-color:var(--magenta);box-shadow:0 0 10px rgba(255,0,110,0.1);}
+.dev-input::placeholder{color:rgba(200,232,255,0.2);font-size:11px;letter-spacing:2px;text-transform:uppercase;}
+.dev-btn{width:100%;padding:12px;margin-top:8px;border:1px solid var(--magenta);border-radius:4px;background:transparent;color:var(--magenta);font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:2px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.dev-btn:hover{background:rgba(255,0,110,0.1);}
+.dev-btn.red{border-color:#ff3030;color:#ff3030;}
+.dev-btn.red:hover{background:rgba(255,48,48,0.1);}
+.dev-btn.green{border-color:var(--green);color:var(--green);}
+.dev-btn.green:hover{background:rgba(0,255,136,0.08);}
+.dev-btn-row{display:flex;gap:8px;}
+.dev-btn-row .dev-btn{flex:1;}
+.dev-result{margin-top:10px;padding:12px;background:rgba(0,245,255,0.03);border:1px solid rgba(0,245,255,0.12);border-radius:6px;font-size:0.82rem;color:rgba(200,232,255,0.6);line-height:1.6;display:none;}
+.dev-result.show{display:block;}
+
+/* DEV LOGIN */
+#devLoginPage{position:fixed;inset:0;z-index:9600;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;padding:20px;}
+#devLoginPage.open{display:flex;}
+.dev-login-box{background:#050816;border:1px solid var(--magenta);border-radius:8px;padding:28px 24px;width:100%;max-width:320px;position:relative;box-shadow:0 0 40px rgba(255,0,110,0.15);animation:cyberPop .2s ease;}
+.dev-login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--magenta),transparent);}
+.dev-lc{position:absolute;width:10px;height:10px;border-color:var(--magenta);border-style:solid;opacity:0.7;}
+.dev-lc.tl{top:0;left:0;border-width:2px 0 0 2px}
+.dev-lc.tr{top:0;right:0;border-width:2px 2px 0 0}
+.dev-lc.bl{bottom:0;left:0;border-width:0 0 2px 2px}
+.dev-lc.br{bottom:0;right:0;border-width:0 2px 2px 0}
+.dev-login-title{font-family:'Orbitron',monospace;font-size:0.7rem;letter-spacing:3px;color:var(--magenta);text-align:center;margin-bottom:6px;}
+.dev-login-sub{font-size:0.8rem;color:rgba(200,232,255,0.4);text-align:center;margin-bottom:18px;letter-spacing:1px;}
+.dev-login-hint{font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:1px;color:var(--magenta);text-align:center;margin-top:8px;min-height:14px;display:block;}
+.dev-lockout{font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:2px;color:#ffcc00;text-align:center;margin-top:8px;display:none;}
+.dev-lockout.show{display:block;}
+
+/* BANNER BAR */
+#bannerBar{position:fixed;top:50px;left:0;right:0;z-index:695;padding:9px 40px 9px 16px;text-align:center;font-family:'Orbitron',monospace;font-size:0.58rem;letter-spacing:2px;color:#fff;display:none;animation:slideDown 0.3s ease;}
+#bannerBar.show{display:block;}
+@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+.banner-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:inherit;cursor:pointer;font-size:1rem;opacity:0.6;}
+
+/* Theme grid overlay - adapts to theme color */
+body::after{background-image:linear-gradient(rgba(var(--grid-color,0,245,255),0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--grid-color,0,245,255),0.04) 1px,transparent 1px) !important;}
+body.theme-red::after{background-image:linear-gradient(rgba(255,32,64,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,32,64,0.04) 1px,transparent 1px) !important;}
+body.theme-green::after{background-image:linear-gradient(rgba(0,255,136,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,0.04) 1px,transparent 1px) !important;}
+body.theme-white::after{background-image:linear-gradient(rgba(224,238,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(224,238,255,0.04) 1px,transparent 1px) !important;}
+body.theme-orange::after{background-image:linear-gradient(rgba(255,140,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,140,0,0.04) 1px,transparent 1px) !important;}
+body.theme-purple::after{background-image:linear-gradient(rgba(180,79,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(180,79,255,0.04) 1px,transparent 1px) !important;}
+body.theme-pink::after{background-image:linear-gradient(rgba(255,64,160,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,64,160,0.04) 1px,transparent 1px) !important;}
+body.theme-yellow::after{background-image:linear-gradient(rgba(255,230,0,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,230,0,0.04) 1px,transparent 1px) !important;}
+
 </style>
 </head>
 <body>
 
 <!-- TOPBAR -->
 <div class="topbar">
-  <button class="topbar-btn" id="sidebarToggle"><i class="fa-solid fa-bars"></i></button>
+  <button class="topbar-btn" id="sidebarToggle" style="flex-shrink:0;"><i class="fa-solid fa-bars"></i><span class="notif-badge" id="notifBadge"></span></button>
+  <div class="topbar-stat token-stat" id="tokenStat" title="Token" style="flex-shrink:0;"><i class="fa-solid fa-bolt"></i><span id="tokenCount">2</span></div>
+  <div class="topbar-stat" id="prodStat" title="Produk" style="flex-shrink:0;"><i class="fa-solid fa-box-open"></i><span id="prodCount">0</span></div>
   <div class="topbar-title">GLOBAL SELL</div>
-  <div style="width:40px"></div>
+  <div class="topbar-stat" id="userStat" title="User" style="flex-shrink:0;"><i class="fa-solid fa-user"></i><span id="userCount">0</span></div>
+  <button onclick="openDevDoor()" id="devDoorBtn" title="Dev" style="width:32px;height:32px;border:1px solid rgba(255,0,110,0.5);border-radius:7px;background:rgba(255,0,110,0.08);color:#ff006e;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.85rem;flex-shrink:0;transition:all 0.2s;"><i class="fa-solid fa-door-open"></i></button>
 </div>
 
 <!-- SIDEBAR -->
@@ -404,9 +513,20 @@ textarea{resize:none;height:80px;}
           </div>
           <button class="reply-cancel" onclick="cancelReply()"><i class="fa-solid fa-xmark"></i></button>
         </div>
-        <div class="chat-footer">
-          <input id="chatInput" placeholder="Tulis pesan..." maxlength="200">
-          <button class="chat-send" onclick="sendChat()"><i class="fa-solid fa-paper-plane"></i></button>
+        <div class="chat-input-area">
+          <div class="tag-popup" id="tagPopup"></div>
+          <div class="reply-bar" id="replyBar">
+            <div style="flex:1;overflow:hidden;">
+              <span class="reply-bar-name" id="replyBarName"></span>
+              <div class="reply-bar-text" id="replyBarText"></div>
+            </div>
+            <button class="reply-cancel" onclick="cancelReply()"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+          <div class="chat-footer">
+            <input id="chatInput" placeholder="Tulis pesan..." maxlength="200">
+            <button class="chat-send" style="margin-right:4px;border-radius:8px;width:36px;height:36px;" onclick="showTagPopup()"><i class="fa-solid fa-at"></i></button>
+            <button class="chat-send" onclick="sendChat()"><i class="fa-solid fa-paper-plane"></i></button>
+          </div>
         </div>
       </div>
     </div>
@@ -447,9 +567,13 @@ textarea{resize:none;height:80px;}
         <div class="sound-item" data-sound="3" onclick="setSound(this)"><i class="fa-solid fa-volume-high"></i><span>Sound 3</span><i class="fa-solid fa-circle-check sound-check"></i></div>
         <div class="sound-item" data-sound="4" onclick="setSound(this)"><i class="fa-solid fa-volume-high"></i><span>Sound 4</span><i class="fa-solid fa-circle-check sound-check"></i></div>
         <div class="sound-item" data-sound="5" onclick="setSound(this)"><i class="fa-solid fa-volume-high"></i><span>Sound 5</span><i class="fa-solid fa-circle-check sound-check"></i></div>
-         <div class="sound-item" data-sound="6" onclick="setSound(this)"><i class="fa-solid fa-volume-high"></i><span>Sound 6</span><i class="fa-solid fa-circle-check sound-check"></i></div>
-          <div class="sound-item" data-sound="7" onclick="setSound(this)"><i class="fa-solid fa-volume-high"></i><span>Sound 7</span><i class="fa-solid fa-circle-check sound-check"></i></div>
-           <div class="sound-item" data-sound="8" onclick="setSound(this)"><i class="fa-solid fa-volume-high"></i><span>Sound 8</span><i class="fa-solid fa-circle-check sound-check"></i></div>
+      
+       <div class="sound-item" data-sound="6" onclick="setSound(this)"><i class="fa-solid fa-volume-high"></i><span>Sound 6</span><i class="fa-solid fa-circle-check sound-check"></i></div>
+      
+       <div class="sound-item" data-sound="7" onclick="setSound(this)"><i class="fa-solid fa-volume-high"></i><span>Sound 7</span><i class="fa-solid fa-circle-check sound-check"></i></div>
+      
+       <div class="sound-item" data-sound="8" onclick="setSound(this)"><i class="fa-solid fa-volume-high"></i><span>Sound 8</span><i class="fa-solid fa-circle-check sound-check"></i></div>
+       <div class="sound-item" data-sound="9" onclick="setSound(this)"><i class="fa-solid fa-volume-high"></i><span>Sound 9</span><i class="fa-solid fa-circle-check sound-check"></i></div>
       </div>
 
       <div class="sb-sec-title"><i class="fa-solid fa-shuffle"></i> Mode & Opsi</div>
@@ -485,7 +609,7 @@ textarea{resize:none;height:80px;}
     </div>
     <div class="intro-tagline">Buy · Sell · Connect</div>
     <div class="ticker-wrap"><div class="ticker-track">
-      <div class="ticker-card"><i class="fa-solid fa-box-open ticker-card-icon"></i><span class="ticker-card-label">Jual Produk</span></div>
+      <div class="ticker-card"><i class="fa-solid fa-box-open ticker-card-icon cyan"></i><span class="ticker-card-label">Jual Produk</span></div>
       <div class="ticker-card"><i class="fa-solid fa-shield-halved ticker-card-icon green"></i><span class="ticker-card-label">Beli Aman</span></div>
       <div class="ticker-card"><i class="fa-solid fa-star ticker-card-icon yellow"></i><span class="ticker-card-label">Rating Produk</span></div>
       <div class="ticker-card"><i class="fa-solid fa-globe ticker-card-icon"></i><span class="ticker-card-label">Realtime</span></div>
@@ -493,7 +617,7 @@ textarea{resize:none;height:80px;}
       <div class="ticker-card"><i class="fa-solid fa-bolt ticker-card-icon yellow"></i><span class="ticker-card-label">Fast Response</span></div>
       <div class="ticker-card"><i class="fa-solid fa-tags ticker-card-icon green"></i><span class="ticker-card-label">Harga Terbaik</span></div>
       <div class="ticker-card"><i class="fa-solid fa-users ticker-card-icon"></i><span class="ticker-card-label">Komunitas</span></div>
-      <div class="ticker-card"><i class="fa-solid fa-box-open ticker-card-icon"></i><span class="ticker-card-label">Jual Produk</span></div>
+      <div class="ticker-card"><i class="fa-solid fa-box-open ticker-card-icon cyan"></i><span class="ticker-card-label">Jual Produk</span></div>
       <div class="ticker-card"><i class="fa-solid fa-shield-halved ticker-card-icon green"></i><span class="ticker-card-label">Beli Aman</span></div>
       <div class="ticker-card"><i class="fa-solid fa-star ticker-card-icon yellow"></i><span class="ticker-card-label">Rating Produk</span></div>
       <div class="ticker-card"><i class="fa-solid fa-globe ticker-card-icon"></i><span class="ticker-card-label">Realtime</span></div>
@@ -598,7 +722,6 @@ textarea{resize:none;height:80px;}
     <div class="divider"></div>
     <div class="products" id="products"><div class="empty">LOADING DATA...</div></div>
   </div>
-
 
   <div class="footer">GLOBAL SELL © 2026 — ALL SYSTEMS OPERATIONAL</div>
   <div class="devf">• Dev-Agung •</div>
@@ -724,11 +847,17 @@ window.submitUsername=async()=>{
   localStorage.setItem("globalSellName",val);
   document.getElementById("usernameModal").classList.remove("show");
   document.getElementById("chatNickDisplay").innerText=myUsername;
+  updatePresence();
+  get(ref(db,"usernames")).then(snap=>{ allUsernames=snap.val()||{}; });
+  initTokens();
 };
 
 function checkUsername(){
   if(!myUsername) document.getElementById("usernameModal").classList.add("show");
   else document.getElementById("chatNickDisplay").innerText=myUsername;
+  updatePresence();
+  get(ref(db,"usernames")).then(snap=>{ allUsernames=snap.val()||{}; });
+  initTokens();
 }
 
 // ── SIDEBAR ──
@@ -745,6 +874,7 @@ window.showPanel=(id,el)=>{
   document.querySelectorAll('.sb-panel').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
   document.getElementById('panel-'+id).classList.add('active');
+  if(id==='chat') clearBadge();
 };
 
 // ── RIWAYAT ──
@@ -754,14 +884,14 @@ function renderRiwayat(){
   if(!mine.length){list.innerHTML='<div class="sb-empty">— BELUM ADA PRODUK —</div>';return;}
   list.innerHTML=mine.map(([id,item])=>`
     <div class="rw-item">
-      <div style="font-family:'Orbitron',monospace;font-size:0.45rem;color:rgba(77,184,255,0.3);letter-spacing:2px;margin-bottom:4px;">ID: ${id.slice(-6).toUpperCase()}</div>
+      <div style="font-family:Orbitron,monospace;font-size:0.45rem;color:rgba(77,184,255,0.3);letter-spacing:2px;margin-bottom:4px;">ID: ${id.slice(-6).toUpperCase()}</div>
       <h4>${item.title}</h4>
       <div class="rw-price">Rp ${item.price}</div>
       <div class="rw-info">⭐ ${Number(item.rating||0).toFixed(1)} · ${item.ratingCount||0} ulasan</div>
       <div class="rw-info">${item.createdAt?new Date(item.createdAt).toLocaleDateString('id-ID'):'—'}</div>
       <div style="display:flex;gap:8px;margin-top:10px;">
-        <button onclick="editProduct('${id}')" style="flex:1;padding:8px;border:1px solid #008cff;border-radius:4px;background:transparent;color:#008cff;font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:1px;cursor:pointer;">✎ EDIT</button>
-        <button onclick="deleteProduct('${id}')" style="flex:1;padding:8px;border:1px solid var(--magenta);border-radius:4px;background:transparent;color:var(--magenta);font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:1px;cursor:pointer;">✕ HAPUS</button>
+        <button onclick="editProduct('${id}')" style="flex:1;padding:8px;border:1px solid #008cff;border-radius:4px;background:transparent;color:#008cff;font-family:Orbitron,monospace;font-size:0.5rem;letter-spacing:1px;cursor:pointer;">✎ EDIT</button>
+        <button onclick="deleteProduct('${id}')" style="flex:1;padding:8px;border:1px solid var(--magenta);border-radius:4px;background:transparent;color:var(--magenta);font-family:Orbitron,monospace;font-size:0.5rem;letter-spacing:1px;cursor:pointer;">✕ HAPUS</button>
       </div>
     </div>`).join('');
 }
@@ -827,12 +957,26 @@ function renderProducts(){
   const keyword=document.getElementById("searchBox").value.toLowerCase();
   const entries=Object.entries(allProducts).reverse().filter(([,item])=>item.title&&item.title.toLowerCase().includes(keyword));
   if(!entries.length){container.innerHTML=`<div class="empty">— NO PRODUCTS FOUND —</div>`;return;}
+  // Auto-remove expired VIP
+  const now_ts = Date.now();
+  entries.forEach(([id,item])=>{
+    if(item.vip && item.vipExp && now_ts > item.vipExp){
+      update(ref(db,'products/'+id),{vip:null,vipExp:null,vipHours:null});
+    }
+  });
+  entries.sort((a,b)=>(b[1].vip?1:0)-(a[1].vip?1:0));
   entries.forEach(([id,item])=>{
     const mine=item.ownerKey===ownerKey;
+    // Check vip still valid
+    const isVip = item.vip && (!item.vipExp || now_ts < item.vipExp);
     const div=document.createElement('div');
-    div.className='product';
+    div.className='product'+(isVip?' vip-product':'');
     div.dataset.id=id;
+    if(item.tplBorder) div.style.borderColor=item.tplBorder;
+    if(item.tplBg) div.style.background=item.tplBg;
     div.innerHTML=`
+      ${isVip ? `<div class="vip-badge"><i class="fa-solid fa-crown"></i><span>VIP</span></div>
+      ${item.vipExp ? `<div class="vip-exp">⏳ EXP: ${new Date(item.vipExp).toLocaleDateString('id-ID',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'})}</div>` : '<div class="vip-exp">♾️ PERMANEN</div>'}` : ''}
       <div class="product-id">ID: ${id.slice(-6).toUpperCase()}</div>
       <h3>${item.title}</h3>
       <div class="seller">Penjual: ${item.seller}</div>
@@ -850,8 +994,12 @@ function renderProducts(){
 document.getElementById("searchBox").addEventListener("input",renderProducts);
 
 // ── UPLOAD ──
-document.getElementById("uploadBtn").onclick=()=>{
+document.getElementById("uploadBtn").onclick=async()=>{
   if(!myUsername){showAlert("NAMA BELUM DIISI","Kamu harus punya nama dulu sebelum upload.");return;}
+  if(myTokens<=0){
+    showAlert("TOKEN HABIS","Token upload kamu habis hari ini. Token akan direset besok pukul 00:00.");
+    return;
+  }
   const title=document.getElementById("title").value.trim();
   const price=document.getElementById("price").value.trim();
   const description=document.getElementById("description").value.trim();
@@ -859,9 +1007,11 @@ document.getElementById("uploadBtn").onclick=()=>{
   const tele=document.getElementById("teleInput").value.trim();
   if(!title||!price){showAlert("DATA TIDAK LENGKAP","Lengkapi Nama Produk dan Harga.");return;}
   if(!wa&&!tele){showAlert("KONTAK BELUM DIISI!","Isi minimal WhatsApp atau Telegram.");return;}
+  const ok = await useToken();
+  if(!ok){showAlert("TOKEN HABIS","Token upload kamu habis hari ini.");return;}
   push(ref(db,"products"),{title,price,seller:myUsername,description,wa,tele,ownerKey,rating:5,ratingCount:1,createdAt:Date.now()});
   ["title","price","description","waInput","teleInput"].forEach(id=>document.getElementById(id).value="");
-  showAlert("UPLOAD BERHASIL","Produk kamu berhasil ditambahkan!");
+  showAlert("UPLOAD BERHASIL","Produk berhasil ditambahkan! Sisa token hari ini: "+myTokens);
 };
 
 // ── REALTIME ──
@@ -869,6 +1019,10 @@ onValue(ref(db,"products"),snap=>{
   allProducts=snap.val()||{};
   renderProducts();
   renderRiwayat();
+  const pc=Object.keys(allProducts).length;
+  const pcEl=document.getElementById('prodCount');
+  if(pcEl) pcEl.innerText=formatCount(pc);
+  _origOnProducts();
 });
 
 // ── RATING ──
@@ -905,6 +1059,8 @@ document.getElementById('enterBtn').addEventListener('click',()=>{
     document.getElementById('introPage').style.display='none';
     checkUsername();
   },700);
+  // Request notification permission
+  setTimeout(requestNotifPermission, 1500);
 });
 
 // ── MAIN PAGE GC ──
@@ -935,7 +1091,7 @@ onValue(ref(db,"globalChat"),snap=>{
       const time=new Date(m.t).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
       return`<div class="chat-bubble ${mine?'mine':'other'}">
         <div class="cb-name">${m.nick||'Anonim'}</div>
-        <div class="cb-text">${m.text}</div>
+        <div class="cb-text">${(m.text||"").replace(/@(\w+)/g,'<span class="tag-pill">@$1</span>')}</div>
         <div class="cb-time">${time}</div>
       </div>`;
     }).join('');
@@ -946,6 +1102,9 @@ onValue(ref(db,"globalChat"),snap=>{
   // update nick displays
   if(myUsername){
     document.getElementById("chatNickDisplay").innerText=myUsername;
+  updatePresence();
+  get(ref(db,"usernames")).then(snap=>{ allUsernames=snap.val()||{}; });
+  initTokens();
   }
 });
 
@@ -957,8 +1116,6 @@ window.sendGcMain=()=>{
   push(ref(db,"globalChat"),{nick:myUsername,text,key:ownerKey,t:Date.now()});
   input.value="";
 };
-
-
 
 // ── PRODUCT CHAT & KOMENTAR ──
 let pchatProductId = null;
@@ -1003,7 +1160,7 @@ function loadDm(pid){
       const time = new Date(m.t).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
       return `<div class="dm-bubble ${mine?'mine':'other'}">
         <div class="dm-name">${m.nick||'Anonim'}</div>
-        <div class="dm-text">${m.text}</div>
+        <div class="dm-text">${(m.text||"").replace(/@(\w+)/g,'<span class="tag-pill">@$1</span>')}</div>
         <div class="dm-time">${time}</div>
       </div>`;
     }).join('');
@@ -1030,11 +1187,19 @@ function loadKom(pid){
     const data = snap.val()||{};
     const koms = Object.values(data).sort((a,b)=>a.t-b.t);
     if(!koms.length){ box.innerHTML='<div class="empty">— BELUM ADA KOMENTAR —</div>'; return; }
-    box.innerHTML = koms.map(k=>{
+    box.innerHTML = koms.map((k,i)=>{
       const time = new Date(k.t).toLocaleDateString('id-ID',{day:'2-digit',month:'short'});
+      const replyHtml = k.replyTo ? `<div style="background:rgba(0,245,255,0.05);border-left:2px solid var(--cyan);padding:4px 8px;border-radius:0 4px 4px 0;margin-bottom:5px;font-size:0.72rem;color:rgba(200,232,255,0.5);"><strong style="font-family:Orbitron,monospace;font-size:0.42rem;color:var(--cyan);display:block;">${k.replyTo.nick}</strong>${k.replyTo.text}</div>` : '';
       return `<div class="kom-item">
-        <div class="kom-user">${k.nick||'Anonim'} <span>${time}</span></div>
-        <div class="kom-text">${k.text}</div>
+        <div class="kom-user" style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="color:var(--cyan);font-family:Orbitron,monospace;font-size:0.5rem;">${k.nick||'Anonim'}</span>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <span style="font-size:0.6rem;color:rgba(200,232,255,0.2);">${time}</span>
+            <button onclick="setKomReply('${(k.nick||'Anonim').replace(/'/g,"\\'")}','${(k.text||'').replace(/'/g,"\\'").replace(/`/g,'').substring(0,50)}')" style="background:none;border:none;color:rgba(0,245,255,0.3);cursor:pointer;font-size:0.75rem;padding:2px 4px;">↩</button>
+          </div>
+        </div>
+        ${replyHtml}
+        <div class="kom-text">${(k.text||"").replace(/@(\w+)/g,'<span class="tag-pill">@$1</span>')}</div>
       </div>`;
     }).join('');
     box.scrollTop = box.scrollHeight;
@@ -1046,15 +1211,17 @@ window.sendKom = () => {
   const text = input.value.trim();
   if(!text||!pchatProductId) return;
   if(!myUsername){ showAlert('NAMA BELUM DIISI','Isi nama kamu dulu.'); return; }
-  push(ref(db,'productKom/'+pchatProductId), {nick:myUsername,text,key:ownerKey,t:Date.now()});
+  const komObj = {nick:myUsername,text,key:ownerKey,t:Date.now()};
+  if(komReplyData) komObj.replyTo = komReplyData;
+  push(ref(db,'productKom/'+pchatProductId), komObj);
   input.value='';
+  window.cancelKomReply();
 };
 document.getElementById('komInput').addEventListener('keydown',e=>{if(e.key==='Enter')window.sendKom();});
 
-
 // ── REPLY SYSTEM ──
 let replyData = null;
-window.setReply = (nick, text) => {
+window._setReply = window.setReply = (nick, text) => {
   replyData = {nick, text};
   document.getElementById('replyBarName').innerText = nick;
   document.getElementById('replyBarText').innerText = text;
@@ -1064,6 +1231,460 @@ window.setReply = (nick, text) => {
 window.cancelReply = () => {
   replyData = null;
   document.getElementById('replyBar').classList.remove('show');
+};
+
+// ── TAG SYSTEM ──
+let onlineUsers = {}; // nick -> key
+
+// Track who's online via presence
+function updatePresence(){
+  if(!myUsername) return;
+  const presRef = ref(db,'presence/'+ownerKey);
+  update(presRef, {nick:myUsername,t:Date.now()});
+  // Clean old presence
+  setTimeout(()=>{
+    get(ref(db,'presence')).then(snap=>{
+      const data = snap.val()||{};
+      const now = Date.now();
+      Object.entries(data).forEach(([k,v])=>{
+        if(now - v.t > 300000) remove(ref(db,'presence/'+k));
+      });
+    });
+  }, 5000);
+}
+
+// Listen all users from usernames for tagging
+let allUsernames = {};
+get(ref(db,'usernames')).then(snap=>{ allUsernames = snap.val()||{}; });
+
+window.showTagPopup = () => {
+  const popup = document.getElementById('tagPopup');
+  const names = Object.values(allUsernames).filter(n=>n!==myUsername);
+  if(!names.length){ document.getElementById('chatInput').focus(); return; }
+  popup.innerHTML = names.map(n=>`
+    <div class="tag-option" onclick="insertTag('${n.replace(/'/g,"\\'")}')">
+      <div class="tag-option-avatar">${n[0].toUpperCase()}</div>
+      @${n}
+    </div>`).join('');
+  popup.classList.toggle('show');
+};
+
+window.insertTag = (name) => {
+  const input = document.getElementById('chatInput');
+  input.value = (input.value + '@'+name+' ').trimStart();
+  document.getElementById('tagPopup').classList.remove('show');
+  input.focus();
+};
+
+// Close tag popup when clicking outside
+document.addEventListener('click', e=>{
+  const popup = document.getElementById('tagPopup');
+  if(popup && !e.target.closest('.chat-input-area')) popup.classList.remove('show');
+});
+
+// ── NOTIFICATIONS ──
+let notifPermission = false; // notif system
+let unreadCount = 0;
+
+async function requestNotifPermission(){
+  if(!('Notification' in window)) return;
+  if(Notification.permission === 'granted'){ notifPermission=true; return; }
+  if(Notification.permission !== 'denied'){
+    const result = await Notification.requestPermission();
+    notifPermission = result === 'granted';
+  }
+}
+
+function sendNotif(title, body, icon=''){
+  if(!notifPermission || document.visibilityState==='visible') return;
+  try{
+    new Notification(title, {body, icon:'https://cdn-icons-png.flaticon.com/512/1384/1384060.png', tag:'gs-notif'});
+  }catch(e){}
+}
+
+function bumpBadge(){
+  unreadCount++;
+  const badge = document.getElementById('notifBadge');
+  if(badge) badge.classList.add('show');
+}
+
+function clearBadge(){
+  unreadCount = 0;
+  const badge = document.getElementById('notifBadge');
+  if(badge) badge.classList.remove('show');
+}
+
+// Clear badge when sidebar opens to chat
+
+// ── KOM REPLY ──
+let komReplyData = null;
+window.setKomReply = (nick, text) => {
+  komReplyData = {nick, text};
+  const bar = document.getElementById('komReplyBar');
+  document.getElementById('komReplyName').innerText = nick;
+  document.getElementById('komReplyText').innerText = text;
+  if(bar){ bar.style.display='flex'; }
+  document.getElementById('komInput').focus();
+};
+window.cancelKomReply = () => {
+  komReplyData = null;
+  const bar = document.getElementById('komReplyBar');
+  if(bar) bar.style.display='none';
+};
+
+// ── TOKEN SYSTEM ──
+let myTokens = 2;
+
+function formatCount(n){
+  if(n >= 1000000) return (n/1000000).toFixed(1).replace('.0','')+'M';
+  if(n >= 1000) return (n/1000).toFixed(1).replace('.0','')+'K';
+  return n.toString();
+}
+
+function getTodayStr(){
+  const d = new Date();
+  return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+}
+
+async function initTokens(){
+  if(!ownerKey) return;
+  const today = getTodayStr();
+  const snap = await get(ref(db,'tokens/'+ownerKey));
+  const data = snap.val()||{};
+  if(data.date !== today){
+    // New day — reset tokens
+    await update(ref(db,'tokens/'+ownerKey), {date:today, count:2});
+    myTokens = 2;
+  } else {
+    myTokens = data.count ?? 2;
+  }
+  updateTokenUI();
+}
+
+function updateTokenUI(){
+  const el = document.getElementById('tokenCount');
+  if(el) el.innerText = myTokens;
+  const stat = document.getElementById('tokenStat');
+  if(stat){
+    stat.style.opacity = myTokens > 0 ? '1' : '0.4';
+    stat.title = myTokens > 0 ? 'Token upload: '+myTokens+'/2' : 'Token habis, reset besok 00:00';
+  }
+}
+
+async function useToken(){
+  if(myTokens <= 0) return false;
+  myTokens--;
+  const today = getTodayStr();
+  await update(ref(db,'tokens/'+ownerKey), {date:today, count:myTokens});
+  updateTokenUI();
+  return true;
+}
+
+// ── USER COUNT ──
+onValue(ref(db,'usernames'), snap=>{
+  const data = snap.val()||{};
+  const count = Object.keys(data).length;
+  const el = document.getElementById('userCount');
+  if(el) el.innerText = formatCount(count);
+});
+
+// ── PRODUCT COUNT ── 
+// Already listening via onValue products, update count there
+
+// ════════════════════════════════
+// DEV SYSTEM
+// ════════════════════════════════
+const _DEV_HASH = 'dccd51f1dc3c0a3bff88a3f4e30b36fd0c0e9bf7a766b5890a6f07df65d54b8c';
+let _devFailCount = 0;
+let _devLockUntil = 0;
+
+async function _sha256(msg){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function _getLockDuration(){
+  if(_devFailCount < 3) return 0;
+  if(_devFailCount < 5) return 60;
+  if(_devFailCount < 6) return 180;
+  if(_devFailCount < 7) return 600;
+  if(_devFailCount < 8) return 1200;
+  return 1800;
+}
+
+let _lockTimer = null;
+function _startLockTimer(){
+  if(_lockTimer) clearInterval(_lockTimer);
+  const hint = document.getElementById('devLockout');
+  _lockTimer = setInterval(()=>{
+    const left = Math.ceil((_devLockUntil - Date.now())/1000);
+    if(left <= 0){
+      clearInterval(_lockTimer);
+      if(hint){ hint.innerText=''; hint.classList.remove('show'); }
+      const btn = document.querySelector('#devLoginPage button:last-child');
+      if(btn) btn.disabled = false;
+      return;
+    }
+    const m = Math.floor(left/60), s = left%60;
+    if(hint){
+      hint.innerText = '⏳ COBA LAGI DALAM ' + (m>0?m+'m ':'')+s+'s';
+      hint.classList.add('show');
+    }
+    const btn = document.querySelector('#devLoginPage button:last-child');
+    if(btn) btn.disabled = true;
+  }, 500);
+}
+
+window.openDevDoor = ()=>{
+  const el=document.getElementById('devLoginPage');
+  if(el){el.style.display='flex';}
+  setTimeout(()=>{ const i=document.getElementById('devPwdInput'); if(i)i.focus(); },150);
+};
+
+window.closeDevLogin = ()=>{
+  const dlp2=document.getElementById('devLoginPage'); if(dlp2) dlp2.style.display='none';
+  const i=document.getElementById('devPwdInput'); if(i)i.value='';
+  const h=document.getElementById('devLoginHint'); if(h)h.innerText='';
+};
+
+window.submitDevLogin = async()=>{
+  const now = Date.now();
+  if(now < _devLockUntil){
+    const left = Math.ceil((_devLockUntil-now)/1000);
+    const m=Math.floor(left/60),s=left%60;
+    document.getElementById('devLoginHint').innerText='🔒 Terkunci. Tunggu '+(m>0?m+'m ':'')+s+'s';
+    return;
+  }
+  const inp = document.getElementById('devPwdInput');
+  const hint = document.getElementById('devLoginHint');
+  const hash = await _sha256(inp.value||'');
+  if(hash === _DEV_HASH){
+    _devFailCount=0; _devLockUntil=0;
+    window.closeDevLogin();
+    const dp=document.getElementById('devPage'); if(dp){dp.style.display='flex';}
+    _loadBannerForDev();
+  } else {
+    _devFailCount++;
+    const dur = _getLockDuration();
+    if(dur > 0){
+      _devLockUntil = Date.now() + dur*1000;
+      _startLockTimer();
+      const m=Math.floor(dur/60),s=dur%60;
+      hint.innerText='⚠ Password salah! Terkunci '+(m>0?m+' menit ':'')+s+'d';
+    } else {
+      hint.innerText='⚠ Password salah! ('+(3-_devFailCount)+' percobaan tersisa)';
+    }
+    if(inp) inp.value='';
+  }
+};
+
+document.getElementById('devPwdInput').addEventListener('keydown',e=>{
+  if(e.key==='Enter') window.submitDevLogin();
+});
+
+window.closeDevDash = ()=>{ const dp=document.getElementById('devPage'); if(dp) dp.style.display='none'; };
+
+// BANNER
+async function _loadBannerForDev(){
+  const snap = await get(ref(db,'devBanner'));
+  const d = snap.val()||{};
+  const bt=document.getElementById('devBannerText'); if(bt) bt.value=d.text||'';
+  const bc=document.getElementById('devBannerColor'); if(bc) bc.value=d.color||'#ff006e';
+}
+
+onValue(ref(db,'devBanner'),snap=>{
+  const d=snap.val()||{};
+  const bar=document.getElementById('bannerBar');
+  const txt=document.getElementById('bannerBarText');
+  if(!bar||!txt) return;
+  if(d.text){
+    txt.innerText=d.text;
+    bar.style.background=d.color||'#ff006e';
+    bar.classList.add('show');
+    document.querySelector('.wrap').style.paddingTop='88px';
+    const ss=document.querySelector('.sticky-search'); if(ss) ss.style.top='88px';
+  } else {
+    bar.classList.remove('show');
+    document.querySelector('.wrap').style.paddingTop='50px';
+    const ss=document.querySelector('.sticky-search'); if(ss) ss.style.top='50px';
+  }
+});
+
+window.saveBanner = async()=>{
+  const text=(document.getElementById('devBannerText').value||'').trim();
+  const color=(document.getElementById('devBannerColor').value||'').trim()||'#ff006e';
+  await update(ref(db,'devBanner'),{text,color});
+  showAlert('BANNER '+(text?'DISIMPAN':'DIHAPUS'), text?'Banner aktif ke semua user.':'Banner berhasil dihapus.');
+};
+
+// VIP
+window.setVip = async(isVip)=>{
+  const shortId=(document.getElementById('devVipId').value||'').trim().toUpperCase();
+  if(!shortId){showAlert('ID KOSONG','Masukkan ID produk.');return;}
+  const entry=Object.entries(allProducts).find(([id])=>id.slice(-6).toUpperCase()===shortId);
+  if(!entry){showAlert('TIDAK DITEMUKAN','ID tidak cocok dengan produk manapun.');return;}
+  const [pid,pdata]=entry;
+  if(isVip){
+    const hours=parseInt(document.getElementById('devVipExp').value)||24;
+    const expTime = hours>=99999 ? null : Date.now()+(hours*3600000);
+    await update(ref(db,'products/'+pid),{vip:true, vipExp:expTime, vipHours:hours});
+    if(pdata.ownerKey){
+      const durStr = hours>=99999?'permanen':hours+'jam';
+      push(ref(db,'userNotif/'+pdata.ownerKey),{
+        type:'dev',msg:'👑 Produk kamu "'+pdata.title+'" mendapat VIP selama '+durStr+'! Produk tampil paling atas.',t:Date.now()
+      });
+    }
+    document.getElementById('devVipId').value='';
+    const durLabel = hours>=99999?'Permanen':hours+' jam';
+    showAlert('VIP AKTIF','Produk tampil paling atas selama '+durLabel+'. Pemilik dinotifikasi.');
+  } else {
+    await update(ref(db,'products/'+pid),{vip:null,vipExp:null,vipHours:null});
+    if(pdata.ownerKey){
+      push(ref(db,'userNotif/'+pdata.ownerKey),{
+        type:'dev',msg:'Produk "'+pdata.title+'" VIP-nya telah dilepas oleh developer.',t:Date.now()
+      });
+    }
+    document.getElementById('devVipId').value='';
+    showAlert('VIP DILEPAS','VIP produk telah dilepas.');
+  }
+};
+
+// DELETE
+window.devDeleteProduct = async()=>{
+  const shortId=(document.getElementById('devDelId').value||'').trim().toUpperCase();
+  if(!shortId){showAlert('ID KOSONG','Masukkan ID produk.');return;}
+  const entry=Object.entries(allProducts).find(([id])=>id.slice(-6).toUpperCase()===shortId);
+  if(!entry){showAlert('TIDAK DITEMUKAN','ID tidak cocok.');return;}
+  const [pid,pdata]=entry;
+  if(pdata.ownerKey){
+    push(ref(db,'userNotif/'+pdata.ownerKey),{
+      type:'dev',msg:'🗑️ Produk kamu "'+pdata.title+'" telah dihapus oleh developer.',t:Date.now()
+    });
+  }
+  await remove(ref(db,'products/'+pid));
+  document.getElementById('devDelId').value='';
+  showAlert('DIHAPUS','Produk berhasil dihapus. Pemilik dinotifikasi.');
+};
+
+// ADD TOKEN
+window.devAddToken = async()=>{
+  const name=(document.getElementById('devTokenName').value||'').trim();
+  const amount=parseInt(document.getElementById('devTokenAmt').value)||1;
+  if(!name){showAlert('NAMA KOSONG','Masukkan nama penjual.');return;}
+  const snap=await get(ref(db,'usernames'));
+  const users=snap.val()||{};
+  const entry=Object.entries(users).find(([,n])=>n.toLowerCase()===name.toLowerCase());
+  if(!entry){showAlert('TIDAK DITEMUKAN','Nama penjual tidak ditemukan.');return;}
+  const [uid,uname]=entry;
+  const today=getTodayStr();
+  const tSnap=await get(ref(db,'tokens/'+uid));
+  const tData=tSnap.val()||{date:today,count:0};
+  const newCount=(tData.count||0)+amount;
+  await update(ref(db,'tokens/'+uid),{date:today,count:newCount});
+  push(ref(db,'userNotif/'+uid),{
+    type:'dev',msg:'⚡ Kamu mendapat '+amount+' token tambahan dari developer! Total token: '+newCount,t:Date.now()
+  });
+  document.getElementById('devTokenName').value='';
+  document.getElementById('devTokenAmt').value='';
+  showAlert('TOKEN DITAMBAH',uname+' sekarang punya '+newCount+' token. User dinotifikasi.');
+};
+
+// SEARCH USER
+window.devSearchUser = async()=>{
+  const name=(document.getElementById('devSearchUser').value||'').trim();
+  if(!name){showAlert('NAMA KOSONG','Masukkan nama penjual.');return;}
+  const snap=await get(ref(db,'usernames'));
+  const users=snap.val()||{};
+  const entry=Object.entries(users).find(([,n])=>n.toLowerCase()===name.toLowerCase());
+  const res=document.getElementById('devUserResult');
+  if(!entry){res.innerHTML='<span style="color:var(--magenta)">User tidak ditemukan.</span>';res.classList.add('show');return;}
+  const [uid,uname]=entry;
+  const tSnap=await get(ref(db,'tokens/'+uid));
+  const tData=tSnap.val()||{};
+  const prodCount=Object.entries(allProducts).filter(([,p])=>p.ownerKey===uid).length;
+  res.innerHTML='<b style="font-family:Orbitron,monospace;font-size:0.6rem;color:var(--cyan);">@'+uname+'</b><br>'
+    +'Key: '+uid.slice(-10)+'<br>'
+    +'Token: '+(tData.count!=null?tData.count:2)+' ('+( tData.date||'-')+')<br>'
+    +'Total produk: '+prodCount;
+  res.classList.add('show');
+};
+
+// TEMPLATE
+window.saveTemplate = async()=>{
+  const shortId=(document.getElementById('devTplId').value||'').trim().toUpperCase();
+  const border=(document.getElementById('devTplBorder').value||'').trim()||null;
+  const bg=(document.getElementById('devTplBg').value||'').trim()||null;
+  if(!shortId){showAlert('ID KOSONG','Masukkan ID produk.');return;}
+  const entry=Object.entries(allProducts).find(([id])=>id.slice(-6).toUpperCase()===shortId);
+  if(!entry){showAlert('TIDAK DITEMUKAN','ID tidak cocok.');return;}
+  const [pid,pdata]=entry;
+  await update(ref(db,'products/'+pid),{tplBorder:border,tplBg:bg});
+  if(pdata.ownerKey){
+    push(ref(db,'userNotif/'+pdata.ownerKey),{
+      type:'dev',msg:'🎨 Produk kamu "'+pdata.title+'" mendapat template card spesial dari developer!',t:Date.now()
+    });
+  }
+  document.getElementById('devTplId').value='';
+  showAlert('TEMPLATE DISIMPAN','Template card berhasil disimpan. Pemilik dinotifikasi.');
+};
+
+// ════════════════════════════════
+// USER NOTIFICATIONS (from dev actions + chat)
+// ════════════════════════════════
+let _lastNotifT = Date.now();
+function _listenUserNotif(){
+  if(!ownerKey) return;
+  onValue(ref(db,'userNotif/'+ownerKey), snap=>{
+    const data=snap.val()||{};
+    const msgs=Object.values(data).sort((a,b)=>a.t-b.t);
+    msgs.forEach(m=>{
+      if(m.t > _lastNotifT){
+        _lastNotifT = m.t;
+        bumpBadge();
+        sendNotif('📢 Global Sell', m.msg);
+        // Show as alert briefly
+        if(m.type==='dev'){
+          setTimeout(()=>showAlert('NOTIFIKASI DEVELOPER', m.msg), 500);
+        }
+      }
+    });
+  });
+}
+
+// Listen notif for product DM (seller gets notified)
+function _listenProductNotif(){
+  if(!ownerKey||!allProducts) return;
+  const myPids = Object.entries(allProducts).filter(([,p])=>p.ownerKey===ownerKey).map(([id])=>id);
+  myPids.forEach(pid=>{
+    onValue(ref(db,'productDM/'+pid), snap=>{
+      const data=snap.val()||{};
+      const msgs=Object.values(data).sort((a,b)=>a.t-b.t);
+      if(!msgs.length) return;
+      const latest=msgs[msgs.length-1];
+      if(latest.t>_lastNotifT && latest.key!==ownerKey){
+        bumpBadge();
+        sendNotif('💬 Pesan Produk', latest.nick+': '+latest.text);
+      }
+    });
+    onValue(ref(db,'productKom/'+pid), snap=>{
+      const data=snap.val()||{};
+      const koms=Object.values(data).sort((a,b)=>a.t-b.t);
+      if(!koms.length) return;
+      const latest=koms[koms.length-1];
+      if(latest.t>_lastNotifT && latest.key!==ownerKey){
+        bumpBadge();
+        sendNotif('📝 Komentar Produk', latest.nick+' mengomentari produkmu: '+latest.text);
+      }
+    });
+  });
+}
+
+// Call after products loaded
+const _origOnProducts = ()=>{
+  if(myUsername && ownerKey) {
+    _listenUserNotif();
+    _listenProductNotif();
+  }
 };
 
 </script>
@@ -1090,6 +1711,13 @@ window.cancelReply = () => {
     <!-- KOMENTAR PANEL -->
     <div class="pchat-panel" id="ppanel-kom">
       <div class="kom-list" id="komList"><div class="empty">MEMUAT...</div></div>
+      <div class="reply-bar" id="komReplyBar" style="display:none;background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.1);border-radius:6px;padding:6px 10px;margin-bottom:6px;align-items:center;gap:8px;">
+        <div style="flex:1;overflow:hidden;">
+          <span style="font-family:'Orbitron',monospace;font-size:0.48rem;color:var(--cyan);display:block;" id="komReplyName"></span>
+          <div style="font-size:0.72rem;color:rgba(200,232,255,0.5);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" id="komReplyText"></div>
+        </div>
+        <button onclick="cancelKomReply()" style="background:none;border:none;color:var(--magenta);cursor:pointer;font-size:0.8rem;">✕</button>
+      </div>
       <div class="kom-footer">
         <input id="komInput" placeholder="Tulis komentar..." maxlength="200">
         <button class="kom-send" onclick="sendKom()"><i class="fa-solid fa-paper-plane"></i></button>
@@ -1098,5 +1726,107 @@ window.cancelReply = () => {
   </div>
 </div>
 
+
+<!-- BANNER BAR -->
+<div id="bannerBar" style="display:none;position:fixed;top:50px;left:0;right:0;z-index:695;padding:9px 40px 9px 16px;text-align:center;font-family:'Orbitron',monospace;font-size:0.58rem;letter-spacing:2px;color:#fff;">
+  <span id="bannerBarText"></span>
+  <button onclick="document.getElementById('bannerBar').style.display='none'" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:inherit;cursor:pointer;font-size:1.1rem;opacity:0.7;">✕</button>
+</div>
+
+<!-- DEV LOGIN -->
+<div id="devLoginPage" style="display:none;position:fixed;inset:0;z-index:9600;background:rgba(0,0,0,0.88);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#050816;border:1px solid #ff006e;border-radius:10px;padding:28px 22px;width:100%;max-width:310px;position:relative;box-shadow:0 0 40px rgba(255,0,110,0.2);text-align:center;">
+    <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#ff006e,transparent);"></div>
+    <div style="font-family:'Orbitron',monospace;font-size:0.72rem;letter-spacing:3px;color:#ff006e;margin-bottom:8px;"><i class="fa-solid fa-door-open"></i> DEV ACCESS</div>
+    <div style="font-size:0.82rem;color:rgba(200,232,255,0.4);margin-bottom:18px;">Masukkan password developer</div>
+    <input id="devPwdInput" type="password" placeholder="PASSWORD..." style="width:100%;padding:13px;border:1px solid rgba(255,0,110,0.3);border-radius:4px;background:rgba(255,0,110,0.04);color:#c8e8ff;font-size:14px;letter-spacing:4px;outline:none;text-align:center;-webkit-appearance:none;font-family:'Orbitron',monospace;">
+    <div id="devLoginHint" style="font-family:'Orbitron',monospace;font-size:0.5rem;color:#ff006e;margin-top:8px;min-height:14px;letter-spacing:1px;"></div>
+    <div id="devLockout" style="font-family:'Orbitron',monospace;font-size:0.5rem;color:#ffcc00;margin-top:4px;display:none;letter-spacing:1px;"></div>
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button onclick="closeDevLogin()" style="flex:1;padding:12px;border:1px solid rgba(255,0,110,0.4);border-radius:4px;background:transparent;color:#ff006e;font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:2px;cursor:pointer;">✕ BATAL</button>
+      <button id="devLoginBtn" onclick="submitDevLogin()" style="flex:1;padding:12px;border:1px solid #ff006e;border-radius:4px;background:rgba(255,0,110,0.1);color:#ff006e;font-family:'Orbitron',monospace;font-size:0.55rem;letter-spacing:2px;cursor:pointer;">▶ MASUK</button>
+    </div>
+  </div>
+</div>
+
+<!-- DEV DASHBOARD -->
+<div id="devPage" style="display:none;position:fixed;inset:0;z-index:9500;background:#020408;flex-direction:column;">
+  <div style="height:50px;background:rgba(2,4,8,0.98);border-bottom:1px solid rgba(255,0,110,0.35);display:flex;align-items:center;padding:0 14px;gap:12px;flex-shrink:0;position:relative;">
+    <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#ff006e,transparent);"></div>
+    <button onclick="closeDevDash()" style="width:38px;height:38px;border:1px solid rgba(255,0,110,0.4);border-radius:7px;background:rgba(255,0,110,0.06);color:#ff006e;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;"><i class="fa-solid fa-arrow-left"></i></button>
+    <span style="flex:1;font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:3px;color:#ff006e;"><i class="fa-solid fa-door-open"></i> DEV DASHBOARD</span>
+    <span style="font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:2px;color:rgba(255,0,110,0.45);">AGZZ</span>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px;">
+
+    <div style="background:rgba(255,0,110,0.04);border:1px solid rgba(255,0,110,0.2);border-radius:8px;padding:16px;position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#ff006e,transparent);"></div>
+      <div style="font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:2px;color:#ff006e;margin-bottom:12px;"><i class="fa-solid fa-bullhorn"></i> BANNER</div>
+      <textarea id="devBannerText" placeholder="TEKS BANNER (KOSONGKAN UNTUK HAPUS)..." style="width:100%;height:65px;padding:10px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:rgba(255,0,110,0.03);color:#c8e8ff;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none;resize:none;display:block;"></textarea>
+      <input id="devBannerColor" placeholder="WARNA HEX (#ff006e)" style="width:100%;padding:10px;margin-top:8px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:rgba(255,0,110,0.03);color:#c8e8ff;font-size:13px;outline:none;-webkit-appearance:none;display:block;">
+      <button onclick="saveBanner()" style="width:100%;padding:11px;margin-top:8px;border:1px solid #ff006e;border-radius:4px;background:transparent;color:#ff006e;font-family:'Orbitron',monospace;font-size:0.52rem;letter-spacing:2px;cursor:pointer;"><i class="fa-solid fa-save"></i> SIMPAN BANNER</button>
+    </div>
+
+    <div style="background:rgba(255,0,110,0.04);border:1px solid rgba(255,0,110,0.2);border-radius:8px;padding:16px;position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#ff006e,transparent);"></div>
+      <div style="font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:2px;color:#ff006e;margin-bottom:12px;"><i class="fa-solid fa-crown"></i> VIP PRODUK</div>
+      <input id="devVipId" placeholder="ID PRODUK (6 KARAKTER TERAKHIR)" style="width:100%;padding:10px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:rgba(255,0,110,0.03);color:#c8e8ff;font-size:13px;outline:none;-webkit-appearance:none;text-transform:uppercase;display:block;">
+      <select id="devVipExp" style="width:100%;padding:10px;margin-top:8px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:#0a0a1a;color:#c8e8ff;font-family:'Orbitron',monospace;font-size:0.52rem;letter-spacing:1px;outline:none;-webkit-appearance:none;cursor:pointer;">
+        <option value="1">⏳ 1 JAM</option>
+        <option value="6">⏳ 6 JAM</option>
+        <option value="24" selected>⏳ 24 JAM</option>
+        <option value="72">⏳ 3 HARI</option>
+        <option value="168">⏳ 7 HARI</option>
+        <option value="720">⏳ 30 HARI</option>
+        <option value="99999">♾️ PERMANEN</option>
+      </select>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <button onclick="setVip(true)" style="flex:1;padding:11px;border:1px solid #00ff88;border-radius:4px;background:rgba(0,255,136,0.06);color:#00ff88;font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:1px;cursor:pointer;"><i class="fa-solid fa-crown"></i> SET VIP</button>
+        <button onclick="setVip(false)" style="flex:1;padding:11px;border:1px solid rgba(180,180,180,0.3);border-radius:4px;background:transparent;color:rgba(180,180,180,0.5);font-family:'Orbitron',monospace;font-size:0.5rem;letter-spacing:1px;cursor:pointer;"><i class="fa-solid fa-xmark"></i> HAPUS VIP</button>
+      </div>
+    </div>
+
+    <div style="background:rgba(255,0,110,0.04);border:1px solid rgba(255,0,110,0.2);border-radius:8px;padding:16px;position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#ff006e,transparent);"></div>
+      <div style="font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:2px;color:#ff006e;margin-bottom:12px;"><i class="fa-solid fa-trash"></i> DELETE PRODUK</div>
+      <input id="devDelId" placeholder="ID PRODUK (6 KARAKTER TERAKHIR)" style="width:100%;padding:10px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:rgba(255,0,110,0.03);color:#c8e8ff;font-size:13px;outline:none;-webkit-appearance:none;text-transform:uppercase;display:block;">
+      <button onclick="devDeleteProduct()" style="width:100%;padding:11px;margin-top:8px;border:1px solid #ff3030;border-radius:4px;background:rgba(255,48,48,0.06);color:#ff3030;font-family:'Orbitron',monospace;font-size:0.52rem;letter-spacing:2px;cursor:pointer;"><i class="fa-solid fa-trash"></i> HAPUS PRODUK</button>
+    </div>
+
+    <div style="background:rgba(255,0,110,0.04);border:1px solid rgba(255,0,110,0.2);border-radius:8px;padding:16px;position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#ff006e,transparent);"></div>
+      <div style="font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:2px;color:#ff006e;margin-bottom:12px;"><i class="fa-solid fa-bolt"></i> KELOLA TOKEN</div>
+      <input id="devTokenName" placeholder="NAMA PENJUAL..." style="width:100%;padding:10px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:rgba(255,0,110,0.03);color:#c8e8ff;font-size:14px;outline:none;-webkit-appearance:none;display:block;">
+      <input id="devTokenAmt" type="number" inputmode="numeric" placeholder="JUMLAH TOKEN (MISAL: 2)" style="width:100%;padding:10px;margin-top:8px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:rgba(255,0,110,0.03);color:#c8e8ff;font-size:14px;outline:none;-webkit-appearance:none;display:block;">
+      <button onclick="devAddToken()" style="width:100%;padding:11px;margin-top:8px;border:1px solid #ff006e;border-radius:4px;background:transparent;color:#ff006e;font-family:'Orbitron',monospace;font-size:0.52rem;letter-spacing:2px;cursor:pointer;"><i class="fa-solid fa-plus"></i> TAMBAH TOKEN</button>
+    </div>
+
+    <div style="background:rgba(255,0,110,0.04);border:1px solid rgba(255,0,110,0.2);border-radius:8px;padding:16px;position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#ff006e,transparent);"></div>
+      <div style="font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:2px;color:#ff006e;margin-bottom:12px;"><i class="fa-solid fa-magnifying-glass"></i> CARI USER</div>
+      <input id="devSearchUser" placeholder="NAMA PENJUAL..." style="width:100%;padding:10px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:rgba(255,0,110,0.03);color:#c8e8ff;font-size:14px;outline:none;-webkit-appearance:none;display:block;">
+      <button onclick="devSearchUser()" style="width:100%;padding:11px;margin-top:8px;border:1px solid #ff006e;border-radius:4px;background:transparent;color:#ff006e;font-family:'Orbitron',monospace;font-size:0.52rem;letter-spacing:2px;cursor:pointer;"><i class="fa-solid fa-search"></i> CARI</button>
+      <div id="devUserResult" style="display:none;margin-top:10px;padding:12px;background:rgba(0,245,255,0.03);border:1px solid rgba(0,245,255,0.12);border-radius:6px;font-size:0.82rem;color:rgba(200,232,255,0.6);line-height:1.7;"></div>
+    </div>
+
+    <div style="background:rgba(255,0,110,0.04);border:1px solid rgba(255,0,110,0.2);border-radius:8px;padding:16px;margin-bottom:30px;position:relative;">
+      <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#ff006e,transparent);"></div>
+      <div style="font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:2px;color:#ff006e;margin-bottom:12px;"><i class="fa-solid fa-palette"></i> TEMPLATE CARD</div>
+      <input id="devTplId" placeholder="ID PRODUK (6 KARAKTER TERAKHIR)" style="width:100%;padding:10px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:rgba(255,0,110,0.03);color:#c8e8ff;font-size:13px;outline:none;-webkit-appearance:none;text-transform:uppercase;display:block;">
+      <input id="devTplBorder" placeholder="WARNA BORDER (#ffcc00)" style="width:100%;padding:10px;margin-top:8px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:rgba(255,0,110,0.03);color:#c8e8ff;font-size:14px;outline:none;-webkit-appearance:none;display:block;">
+      <input id="devTplBg" placeholder="WARNA BG (rgba(255,204,0,0.05))" style="width:100%;padding:10px;margin-top:8px;border:1px solid rgba(255,0,110,0.2);border-radius:4px;background:rgba(255,0,110,0.03);color:#c8e8ff;font-size:14px;outline:none;-webkit-appearance:none;display:block;">
+      <button onclick="saveTemplate()" style="width:100%;padding:11px;margin-top:8px;border:1px solid #ff006e;border-radius:4px;background:transparent;color:#ff006e;font-family:'Orbitron',monospace;font-size:0.52rem;letter-spacing:2px;cursor:pointer;"><i class="fa-solid fa-save"></i> SIMPAN TEMPLATE</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Fix devPwdInput enter key (non-module)
+document.addEventListener('DOMContentLoaded',function(){
+  var inp = document.getElementById('devPwdInput');
+  if(inp) inp.addEventListener('keydown',function(e){if(e.key==='Enter')window.submitDevLogin&&window.submitDevLogin();});
+});
+</script>
 </body>
 </html>
